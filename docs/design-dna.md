@@ -12,7 +12,7 @@ These override anything earlier in this file's history.
 
 1. **No dark sections.** A dark auditorium scene behind the curtain (seats lit by rollout share) was rejected. Everything past the drape sits on **pure white** with the silk's orange as the accent. No cream or tinted grounds.
 2. **Inter Tight, not a display serif.** A condensed Didone (Imbue) was rejected. One family, Inter Tight, for headlines and text; Fragment Mono only for code and small data labels.
-3. **Scroll moves the product, never its data.** A console whose numbers and states changed with scroll was rejected as poor UX. The console shows one fixed, healthy release; scroll moves it as an object (rises, comes apart, snaps back).
+3. **Scroll moves the product, never its data.** A console whose numbers and states changed with scroll was rejected as poor UX. The console shows one fixed, healthy release; scroll moves it as an object (rises, comes apart, stays apart).
 4. **A natural hero.** The drape no longer opens or flies out on scroll, and carries no paragraph: just the poster, the CTA and the pointer-parted folds. It scrolls away like any section.
 5. **No ordinary FAQ.** The questions are a flag list: each answer is rolled out by its own switch.
 
@@ -75,15 +75,15 @@ Roles: **orange (silk 500)** is "on": the main action on white, lit audience dot
 
 1. **Drape.** A static hero; only the pointer moves the cloth.
 2. **The set rises** while its section scrolls in: the console lies on the stage floor (rotateX 72°) and hinges up to face the viewer.
-3. **The set comes apart (pinned, 0.08–0.36, holds to 0.66).** The console turns (rotateX 14°, rotateY −20°); its four cards lift to depths of 100–240 px off dashed sockets, with callouts on leader lines.
-4. **Snap back (0.66–0.90).**
+3. **The set comes apart (pinned, 0.10–0.60, holds to the end of the pin).** The console turns (rotateX 14°, rotateY −20°); its four cards lift to depths of 100–240 px off dashed sockets, with callouts on leader lines.
+4. **Scrolls on exploded.** The cards stay apart as the section unpins and leaves.
 5. **Features:** each card stands up from its bottom edge (rotateX 26° → 0) and plays one product scene once.
 6. **Developers:** 40 → 0.04 ms on a logarithmic scrub, with the bar collapsing in step.
 7. **Reviews:** two rows translate in opposite directions with scroll.
 8. **Questions:** switches roll answers out, a bar sweeping each row.
-9. **Curtain call:** the drape falls closed over the closing numbers; the CTA fades in once it has landed.
+9. **Curtain call:** the drape falls closed over the closing numbers on a sine glide, throwing a soft shadow ahead of its hem while the stage dims; the CTA rises in once it has landed.
 
-Phones skip step 3; reduced motion snaps every step to its end state.
+Lenis smooths the page scroll throughout. Phones skip step 3; reduced motion turns Lenis off and snaps every step to its end state.
 
 ## Genericness check (64-ai-aesthetic-detector, re-run on the rendered page)
 

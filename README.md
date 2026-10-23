@@ -6,7 +6,7 @@ The drape opens and closes the page. Everything between is white, with the silk'
 
 1. **The drape (hero):** a full-screen silk curtain with "Rehearse in production." printed on it, in the cloth's own light: cream on the umber, ink on the gold. The folds part toward the pointer. It scrolls away like any other section.
 2. **The set rises:** the Scrim console arrives lying on the stage floor in perspective and hinges up to face you as its section scrolls into view.
-3. **The set comes apart:** pinned, the console turns in 3D and its four cards (Rollout, Audience, Guardrails, Show report) lift off their sockets at different depths, each with a callout, then snap back into place. The console's content never changes with scroll.
+3. **The set comes apart:** pinned, the console turns in 3D and its four cards (Rollout, Audience, Guardrails, Show report) lift off their sockets at different depths, each with a callout. They stay apart, and the section scrolls on with the console still exploded. The console's content never changes with scroll.
 4. **Features:** a bento of seven cards, each a real piece of product UI (rule builder, schedule, guardrail breach, A/B result, approval, audit log, cleanup PR). Cards rise into place like scenery and play one small scene each. The headline's inline switch turns on as it arrives.
 5. **Developers:** "40 ms" scrubs down to "0.04 ms" as you scroll, with a comparison bar collapsing alongside it, then a code window in four languages.
 6. **Reviews:** two rows of notices sliding past each other with scroll.
@@ -24,7 +24,7 @@ npm run build    # static production build
 
 ## Stack
 
-Next.js 16 (App Router), React 19, TypeScript and Tailwind CSS v4. There is no animation library and there are no image files: the drape is a fragment shader, and everything else is HTML, CSS and SVG.
+Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4 and Lenis for smooth scrolling (`src/components/smooth-scroll.tsx`). There is no animation library and there are no image files: the drape is a fragment shader, and everything else is HTML, CSS and SVG.
 
 ## How the scroll scenes work
 
@@ -35,7 +35,7 @@ Next.js 16 (App Router), React 19, TypeScript and Tailwind CSS v4. There is no a
 
 The timelines are constants at the top of each scene: `WIDE` and `NARROW` in `show.tsx`, and the ranges in `curtain-call.tsx`. Cards and headlines marked `.rise` or `.reveal` are revealed once by `src/components/motion.tsx`.
 
-With `prefers-reduced-motion`, smoothing is off, the console appears upright without coming apart, the closing drape is simply down, the number shows its final value and the review rows stay still.
+With `prefers-reduced-motion`, Lenis and the scene smoothing are off, the console appears upright without coming apart, the closing drape is simply down, the number shows its final value and the review rows stay still.
 
 ## The drape
 
