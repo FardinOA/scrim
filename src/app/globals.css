@@ -1,0 +1,365 @@
+@import "tailwindcss";
+
+/*
+  Scrim palette: the silk drape's amber ramp on pure white.
+
+  The silk ramp is the drape's own light, from deep umber where the cloth hangs
+  in shadow to pale gold where the backlight comes through. Behind the curtain
+  everything is lit: white grounds, near-neutral mist for wells, ink type.
+  Orange (silk 500) means "on": a user who can see the feature, a cue that has
+  fired, the main action. Silk 800 carries small accent text (5.6:1 on white).
+  Safety red appears only when a guardrail trips.
+*/
+@theme inline {
+  --color-silk-50: #fbf3e4;
+  --color-silk-100: #f6e8cf;
+  --color-silk-200: #f6d9a8;
+  --color-silk-300: #fec574;
+  --color-silk-400: #fbb44e;
+  --color-silk-500: #f09f30;
+  --color-silk-600: #e18b1d;
+  --color-silk-700: #b8681c;
+  --color-silk-800: #924f1b;
+  --color-silk-900: #693715;
+  --color-silk-950: #3b1d07;
+
+  --color-paper: #ffffff;
+  --color-mist: #f7f6f5;
+  --color-mist-2: #eeedeb;
+  --color-card: #ffffff;
+
+  --color-ink: #18120e;
+  --color-ink-2: #4b4541;
+  --color-ink-3: #827b76;
+
+  /* Text on the drape. */
+  --color-cream: #f6e8cf;
+
+  --color-safety: #cf3d25;
+  --color-safety-soft: #fbe6df;
+
+  --font-display: var(--font-sans-face), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans-face), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, monospace;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  background: var(--color-paper);
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+  overflow-x: clip;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-silk-300);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-silk-700);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@layer components {
+  /* ---------- Layout and type ---------- */
+
+  .shell {
+    width: 100%;
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: clamp(16px, 3.4vw, 44px);
+  }
+
+  /* Inter Tight, set heavy and tight for headlines and big numerals. */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 0.94;
+  }
+
+  .label {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* A lifted white surface: hairline, a lit top edge, and a long soft shadow warmed toward umber. */
+  .card {
+    background: var(--color-card);
+    border-radius: 22px;
+    box-shadow:
+      0 0 0 1px rgb(31 19 11 / 0.07),
+      0 1px 0 0 rgb(255 255 255 / 0.9) inset,
+      0 1px 2px rgb(59 29 7 / 0.05),
+      0 22px 44px -30px rgb(59 29 7 / 0.32);
+  }
+
+  /* A sunken well inside a card, where its little piece of product sits. */
+  .well {
+    background: var(--color-mist);
+    border-radius: 16px;
+    box-shadow: inset 0 0 0 1px rgb(31 19 11 / 0.05);
+  }
+
+  /* ---------- Buttons ---------- */
+
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 48px;
+    padding-inline: 22px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s var(--ease-out-soft);
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn .arrow {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.35s var(--ease-out-soft);
+  }
+  .btn:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  .btn-ink {
+    background: var(--color-ink);
+    color: var(--color-cream);
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.12) inset, 0 10px 24px -12px rgb(31 19 11 / 0.6);
+  }
+  .btn-ink:hover {
+    background: var(--color-silk-950);
+  }
+
+  /* Orange: the main action on white. Ink type on it (8:1). */
+  .btn-orange {
+    background: var(--color-silk-500);
+    color: var(--color-ink);
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.45) inset, 0 10px 24px -12px rgb(225 139 29 / 0.75);
+  }
+  .btn-orange:hover {
+    background: var(--color-silk-400);
+  }
+
+  .btn-gold {
+    background: var(--color-silk-400);
+    color: var(--color-ink);
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.5) inset, 0 10px 24px -14px rgb(146 79 27 / 0.7);
+  }
+  .btn-gold:hover {
+    background: var(--color-silk-300);
+  }
+
+  .btn-line {
+    background: var(--color-card);
+    color: var(--color-ink);
+    box-shadow: 0 0 0 1px rgb(31 19 11 / 0.12);
+  }
+  .btn-line:hover {
+    box-shadow: 0 0 0 1px rgb(31 19 11 / 0.3);
+  }
+
+  .link {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+    transition: text-decoration-color 0.25s, color 0.25s;
+  }
+  .link:hover {
+    text-decoration-color: var(--color-silk-600);
+  }
+
+  /* ---------- Reveals ---------- */
+
+  /* Only hidden once scripts are known to run, so the page never ships blank. */
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.9s var(--ease-out-soft) var(--d, 0ms),
+      transform 1s var(--ease-out-soft) var(--d, 0ms);
+  }
+  .js .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Scenery rising into place: tipped back on its bottom edge, then stood up. */
+  .js .rise {
+    opacity: 0;
+    transform: perspective(1400px) translateY(56px) rotateX(26deg);
+    transform-origin: 50% 100%;
+    transition:
+      opacity 0.8s var(--ease-out-soft) var(--d, 0ms),
+      transform 1.25s var(--ease-out-soft) var(--d, 0ms);
+  }
+  .js .rise.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ---------- Range input (pricing) ---------- */
+
+  .range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 28px;
+    background: transparent;
+    cursor: pointer;
+  }
+  .range::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--color-ink) var(--fill, 0%), rgb(31 19 11 / 0.1) var(--fill, 0%));
+  }
+  .range::-moz-range-track {
+    height: 4px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--color-ink) var(--fill, 0%), rgb(31 19 11 / 0.1) var(--fill, 0%));
+  }
+  .range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    margin-top: -10px;
+    border-radius: 50%;
+    background: var(--color-card);
+    box-shadow: 0 0 0 1px rgb(31 19 11 / 0.14), 0 4px 10px -2px rgb(59 29 7 / 0.35);
+    transition: transform 0.2s var(--ease-out-soft);
+  }
+  .range::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--color-card);
+    box-shadow: 0 0 0 1px rgb(31 19 11 / 0.14), 0 4px 10px -2px rgb(59 29 7 / 0.35);
+  }
+  .range:active::-webkit-slider-thumb {
+    transform: scale(1.1);
+  }
+}
+
+/* The ticket's two notches, where the perforation meets its edges. Only when the stub sits beside it. */
+@media (min-width: 768px) {
+  .ticket {
+    --notch: radial-gradient(circle at calc(100% - var(--stub)) 0, transparent 15px, #000 15.5px) top / 100% 51% no-repeat,
+      radial-gradient(circle at calc(100% - var(--stub)) 100%, transparent 15px, #000 15.5px) bottom / 100% 51% no-repeat;
+    -webkit-mask: var(--notch);
+    mask: var(--notch);
+  }
+}
+
+/* The drape with no WebGL: the same ramp, without the folds. */
+.drape-floor {
+  background: linear-gradient(180deg, var(--color-silk-950) 0%, var(--color-silk-800) 42%, var(--color-silk-600) 72%, var(--color-silk-300) 100%);
+}
+
+/* A new caption takes the stage. */
+@keyframes beat-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(6px);
+  }
+}
+.beat-in {
+  animation: beat-in 0.7s var(--ease-out-soft) both;
+}
+
+/* A new line arrives in a feed. */
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+.row-in {
+  animation: row-in 0.5s var(--ease-out-soft) both;
+}
+
+/* The scroll hint: a drop running down a cue line. */
+@keyframes cue {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(240%);
+  }
+}
+
+/* Audience dots: off, on, and the team. Each dot waits its own beat (--w) so a rollout shimmers in. */
+.dot {
+  fill: rgb(31 19 11 / 0.1);
+  transition: fill 0.45s var(--ease-out-soft) var(--w, 0ms);
+}
+.dot[data-on="1"] {
+  fill: var(--color-silk-500);
+}
+.dot[data-team][data-on="1"] {
+  fill: var(--color-silk-900);
+}
+
+/* Lenis owns the glide while it runs; native smooth scrolling would fight it. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .js .reveal,
+  .js .rise {
+    opacity: 1;
+    transform: none;
+  }
+}
